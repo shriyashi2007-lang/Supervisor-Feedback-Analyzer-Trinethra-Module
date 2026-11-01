@@ -18,8 +18,8 @@ router.post('/', async (req, res) => {
 
   try {
     // Call Ollama API
-    const response = await axios.post('http://localhost:11434/api/generate', {
-      model: 'llama3.2',
+    const response = await axios.post(`${process.env.OLLAMA_URL || 'http://127.0.0.1:11434'}/api/generate`, {
+      model: process.env.OLLAMA_MODEL || 'llama3.2',
       prompt: prompt,
       stream: false
     });
@@ -30,8 +30,8 @@ router.post('/', async (req, res) => {
     // If parsing failed, retry once
     if (!analysis || analysis.error) {
       console.log('Parsing failed, retrying...');
-      const retryResponse = await axios.post('http://localhost:11434/api/generate', {
-        model: 'llama3.2',
+      const retryResponse = await axios.post(`${process.env.OLLAMA_URL || 'http://127.0.0.1:11434'}/api/generate`, {
+        model: process.env.OLLAMA_MODEL || 'llama3.2',
         prompt: prompt,
         stream: false
       });

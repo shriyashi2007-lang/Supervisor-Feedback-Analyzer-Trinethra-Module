@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "check": "node --check server.js && node --check routes/analyze.js && node --check utils/promptBuilder.js && node --check utils/jsonParser.js"
   },
   "dependencies": {
     "express": "^4.18.2",
